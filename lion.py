@@ -1,13 +1,13 @@
-import docx
-import matplotlib.pyplot as plt
-import pandas as pd
+import docx  #импортируем библиотеки
+import matplotlib.pyplot as plt  #импортируем библиотеки
+import pandas as pd  #импортируем библиотеки
 
-doc = docx.Document('lion.docx')
-text = ''
-for paragraph in doc.paragraphs:
+doc = docx.Document('lion.docx')  #файл docx
+text = ''  #создаем пустую строку
+for paragraph in doc.paragraphs:  #добавляем параграфы в нашу строку
     text += paragraph.text
 
-punc = '/?!.,"«»[](){}-–:;—_1234567890xiv'
+punc = '/?!.,"«»[](){}-–:;—_1234567890xiv'  #убираем лишние символы
 for i in range(0, len(punc)) :
     if punc[i] in text : 
         text = text.replace(punc[i], ' ')
@@ -17,7 +17,7 @@ text = text.split()
 
 
 
-words = {}
+words = {}  #создаем словарь
 for item in text:
     if item in words:
         words[item] += 1
@@ -27,42 +27,42 @@ for item in text:
 wor = []
 ks = []
 pr = []
-for key in words.keys():
-    ks.append(words[key])
-    wor.append(key)
-    pr.append(int(words[key])/len(words)*100)
+for key in words.keys():  #проверка по ключу
+    ks.append(words[key])  #столбик с ключами
+    wor.append(key)  #столбик со словами
+    pr.append(int(words[key])/len(words)*100)  #столбик со значениями
 
 
 
 
 
-data = {
+data = {  #создаем таблицу
     'Слово': wor,
     'Частота встречи, раз' : ks,
     'Частота встречи в %' : pr
 }
 
-df = pd.DataFrame(data)
-print(df)
+df = pd.DataFrame(data)  #создаем именно таблицу
+print(df)  #выводим таблицу
 
 
 
 
-doc = docx.Document('lion.docx')
+doc = docx.Document('lion.docx')  #файл docx
 tex = ''
-for paragraph in doc.paragraphs:
+for paragraph in doc.paragraphs:  #добавляем параграфы в нашу строку
     tex += paragraph.text
 
-punc = '/?!.,"«»[](){}-–:;—_1234567890xiv'
+punc = '/?!.,"«»[](){}-–:;—_1234567890xiv'  #убираем лишиние символы
 for i in range(0, len(punc)) :
     if punc[i] in tex : 
         tex = tex.replace(punc[i], ' ')
 tex = tex.lower()
 chlist = [] 
-for c in tex: 
+for c in tex:   #добавляем в наш пусток ссписок chlist все буквы
     chlist.append(c)
 
-ch = {}
+ch = {}  #создаем пустой словарь для дальнейшего добавления туда значений и ключа
 for item in chlist:
     if item in ch:
         ch[item] += 1
@@ -73,16 +73,16 @@ for item in chlist:
 
 val = []
 nuv = []
-for key in ch.keys():
+for key in ch.keys():  #подбираем значения для графика
     nuv.append(ch[key])
     val.append(key)
-#создаем график через бар, т.к. он создаёт НУЖНЫЙ график для нас, в отличии от plot
-plt.bar(val, nuv)
 
-#называем оси и сам график
-plt.xlabel("буквы")
-plt.ylabel("Количество")
-plt.title("Гистограмма количества букв")
+plt.bar(val, nuv)  #создаем график
 
-#показ графика
-plt.show()
+
+plt.xlabel("буквы")  #называем оси
+plt.ylabel("Количество")  #называем оси
+plt.title("Гистограмма количества букв")  #называем график
+
+
+plt.show()  #график
