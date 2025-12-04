@@ -2,7 +2,6 @@ import docx  #импортируем библиотеки
 import matplotlib.pyplot as plt  #импортируем библиотеки
 import pandas as pd  #импортируем библиотеки
 
-doc = docx.Document('lion.docx')  #файл docx
 text = ''  #создаем пустую строку
 for paragraph in doc.paragraphs:  #добавляем параграфы в нашу строку
     text += paragraph.text
